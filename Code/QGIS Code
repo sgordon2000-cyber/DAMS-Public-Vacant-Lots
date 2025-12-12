@@ -1,0 +1,19 @@
+Mapping Lots:
+Added NY BB, PLUTO, Zoning Map, and subway station to QGIS
+Filtered Zoning Map to only include R zones, and minimum size lot by R zoning category
+"LandUse" = '11' ,AND "OwnerType" != 'P' AND (
+   ("ZoneDist1" LIKE 'R1%' AND "LotArea" >= 5700) OR
+   ("ZoneDist1" LIKE 'R2%' AND "LotArea" >= 3800) OR
+   (("ZoneDist1" LIKE 'R3%' OR "ZoneDist1" LIKE 'R4%' OR "ZoneDist1" LIKE 'R5%') AND "LotArea" >= 1700) OR
+   ("ZoneDist1" LIKE 'R%' AND "ZoneDist1" >= 'R6' AND "LotArea" >= 1700)
+)
+Buffer, .5 miles from Subway Station
+Select Features by within buffer
+Created new layer, converted to dots rather than geometry
+Added Subway line Shapefile, rule based symbology to color code by line
+
+HeatMap:
+Made copy of vacant lots layer
+Tabular join with R code to get net_new_units column
+Created heat map symbology, weighing by net_new_units, clip to BB layer
+Add Subway shapefile
